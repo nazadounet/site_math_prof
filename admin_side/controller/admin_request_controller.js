@@ -1,12 +1,5 @@
 $( document ).ready(function() {
 
-    function l(data) {
-        console.log(data);
-    }
-
-    function e(data) {
-        document.getElementById("error").innerHTML = data;
-    }
 
     /*
     contiennent les différentes erreurs et warning a afficher sur l'interface ou pour bloquer
@@ -23,11 +16,10 @@ $( document ).ready(function() {
     //différente info contonu dans l'element button.
     for(i = 0; i < get_all_submit_button.length; i++){
 
-        //construction de la variables qui sera passé en data lors de la requête vers php
 
         get_all_submit_button[i].addEventListener('click', function (event) {
 
-            var that = this;
+        //construction de la variables qui sera passé en data lors de la requête vers php
 
             var construc_php_request = [{
                 "require" : "",
@@ -41,6 +33,8 @@ $( document ).ready(function() {
                     }
                 }
             }];
+
+            var that = this;
 
             //récupération de la table a modifié
             switch (true){
@@ -77,7 +71,7 @@ $( document ).ready(function() {
                 //récup tout les input
                 var get_all_inputs = that.parentNode.querySelectorAll("input");
 
-                l(get_all_inputs);
+                console.log(get_all_inputs);
 
                 //check si les inputs sont vide
                 //si vide, vu qu'il ne sont pas require => incrémente var warnings
@@ -88,6 +82,7 @@ $( document ).ready(function() {
                        var field = that.parentNode.querySelector(search_for_label).textContent;
                        warnings[field] = "Le champs " + field + " est vide";
                     }else{
+                        //selon le name de l'input, incrémentation de la var construc_php_request
                            switch (get_all_inputs[i].name) {
                                case "cours_tes_sub_title":
                                    construc_php_request[0].field_to_updade.cours_tes_sub_title.push(get_all_inputs[i].value);
@@ -107,26 +102,21 @@ $( document ).ready(function() {
 
                 }
 
-
                 warnings = {};
-                l(construc_php_request);
 
                 //si errors et warning sont vide alors = requete vers php
                 if(Object.keys(warnings).length === 0) {
-                    $.ajax({
-                        url: "php_backend/controller/request_controller.php",
-                        method: "POST",
-                        data: construc_php_request[0],
-                        success: function (response) {
-                            l(response);
-                        },
-                        error: function (response) {
-                            l(response);
-                        }
-                    });
+                console.log(construc_php_request);
+                    ajax_object.ajax_request("../php_backend/controller/request_controller.php", "POST", construc_php_request[0])
+                        .done(function (response) {
+                            console.log(response);
+                        })
+                        .fail(function (response) {
+                            console.log (response);
+                        });
                 }
             }else{
-                l(errors);
+                console.log(errors);
                 return false;
             }
 

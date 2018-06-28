@@ -5,10 +5,10 @@
         $req->execute($arg);
 
         if($one){
-            $data = $req->fetch(PDO::FETCH_OBJ);
+            $data = $req->fetch(PDO::FETCH_ASSOC);
             return $data;
         }else if($all){
-            $data = $req->fetchAll(PDO::FETCH_OBJ);
+            $data = $req->fetchAll(PDO::FETCH_ASSOC);
             return $data;
         }
 

@@ -66,19 +66,36 @@ function cours_tes_request($pdo, $request){
             break;
 
             case "select":
-
+/*
                 $all_cours_tes = [
-                    "cours_tes_id" => 20,
-                    "cours_tes_tile" => "eee",
-                    "cours_tes_place_number" => 1,
-                    "cours_tes_date" => "date",
-                    "cours_tes_sub_title" => ["donné", "donné2"],
-                ];
-
+                    "cours_tes_title" => "",
+                    "cours_tes_id" => "",
+                    "cours_tes_place_number" => "",
+                    "cours_tes_date" => "",
+                    "cours_tes_sub_title" => [],
+                    "cours_tes_exe_int" =>[
+                        "cours_tes_exe_int_url" => [],
+                        "cours_tes_exe_int_name" => []
+                        ]
+                    ];
+*/
                 if($request["all"]){
 
-                    $cours_tes_data = request_prepare($pdo,'SELECT * FROM cours_tes', null, null, true );
+                    $all_cours_tes = [];
 
+                    $all_cours_tes = request_prepare($pdo,'SELECT * FROM cours_tes', null, null, true );
+
+                    return request_prepare($pdo, "SELECT * FROM cours_tes_exercice_interactif,cours_tes_exo_pdf, cours_tes_pdf, cours_tes_sub_title WHERE cours_tes_exercice_interactif.cours_tes_id AND cours_tes_exo_pdf.cours_tes_id AND cours_tes_pdf.cours_tes_id AND cours_tes_sub_title.cours_tes_id = :cours_tes_id", ["cours_tes_id" => $all_cours_tes[0]["cours_tes_id"]],
+                        null,
+                        true);
+
+
+/*
+                    $all_cours_tes["cours_tes_title"] = $response[0]["cours_tes_title"];
+                    $all_cours_tes["cours_tes_id"] = $response[0]["id"];
+                    $all_cours_tes["cours_tes_place_number"] = $response[0]["cours_tes_place_number"];
+                    $all_cours_tes["cours_tes_date"] = $response[0]["date"];
+*/
                 }
             break;
         }
