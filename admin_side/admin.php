@@ -7,4 +7,4 @@
 <!-- CONTENT SECTION --
 
 
-<?php require_once "../include/footer.php"?>
+<?php include("include/footer.html")?>

@@ -44,7 +44,7 @@
         </div>
 
     <button type="button" name="insert" class="admin_submit_button cours_tes">Valider</button>
-    <button onclick="cours_tes_object.get_all_data()">Valider</button>
+    <button onclick="display_data_cours_tes()" type="button" name="select" class="">Valider</button>
 
 
     <div>
@@ -58,13 +58,20 @@
             <tr style="border:1px solid">
                 <td style="border:1px solid">
                     <div>
-                        <div class="section_container">
-                            <p class="display_cours_tes_title">chapitre</p>
-                            <button class="update"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
+                        <div id="cours_tes" class="display_flex_row_center_center">
+                            <span class="display_cours_tes_title">chapitre</span>
+                            <input id="1" type="hidden" name="cours_tes_title">
+                            <button onclick="display_data_cours_tes()">update</button>
                         </div>
-                        <ul>
-                            <li class="display_cours_tes_sub_title">item</li>
-                        </ul>
+                        <div id="cour_tes_sub_title" class="display_flex_col_center_center">
+                            <ul>
+                                <li class="display_flex_row_center_center">
+                                    <span>sub_title</span>
+                                    <input id="1" type="hidden" name="cours_tes_sub_title">
+                                    <button>update</button>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </td>
                 <td style="border:1px solid">

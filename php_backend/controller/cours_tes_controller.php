@@ -2,13 +2,15 @@
 
 function cours_tes_request($pdo, $request){
 
+
         switch ($request["sql_request"]){
             case "insert":
+    //print_r(json_encode($request)); die();
 
                 $response_from_insert = [];
 
                 $response = request_prepare($pdo, 'INSERT INTO cours_tes SET cours_tes_title = :cours_tes_title',
-                    ["cours_tes_title" => $request["field_to_updade"]["cours_tes_title"]]);
+                    ["cours_tes_title" => $request["data"]["field_to_updade"]["cours_tes_title"]]);
 
                 $all_attached_fields = ["cours_tes_exo_pdf", "cours_tes_pdf"];
 
@@ -17,11 +19,11 @@ function cours_tes_request($pdo, $request){
                     $check_status = request_prepare($pdo, "INSERT INTO  $all_attached_fields[$i] SET cours_tes_id = :cours_tes_id", ["cours_tes_id" =>$response["last_insert_id"]]);
                 }
 
-                    foreach ($request["field_to_updade"] as $key => $value) {
+                    foreach ($request["data"]["field_to_updade"] as $key => $value) {
 
                         switch ($key){
                             case "cours_tes_sub_title":
-                                foreach ($request["field_to_updade"]["cours_tes_sub_title"] as $value){
+                                foreach ($request["data"]["field_to_updade"]["cours_tes_sub_title"] as $value){
                                     request_prepare($pdo, "INSERT INTO cours_tes_sub_title  SET $key = :value, cours_tes_id = :cours_tes_id", ["value" => $value, "cours_tes_id" => $response["last_insert_id"]]);
                                 }
                             break;
@@ -40,12 +42,12 @@ function cours_tes_request($pdo, $request){
                                     ]);
                             break;
                             case "cours_tes_exe_int":
-                                for ($i = 0; $i < sizeof($request["field_to_updade"]["cours_tes_exe_int"]["cours_tes_exe_int_name"]); $i++){
+                                for ($i = 0; $i < sizeof($request["data"]["field_to_updade"]["cours_tes_exe_int"]["cours_tes_exe_int_name"]); $i++){
 
                                     request_prepare($pdo, "INSERT INTO cours_tes_exercice_interactif SET cours_tes_exe_int_name = :cours_tes_exe_int_name, cours_tes_exe_int_url = :cours_tes_exe_int_url, cours_tes_id = :cours_tes_id",
                                         [
-                                            "cours_tes_exe_int_name" =>  $request["field_to_updade"]["cours_tes_exe_int"]["cours_tes_exe_int_name"][$i],
-                                            "cours_tes_exe_int_url" =>  $request["field_to_updade"]["cours_tes_exe_int"]["cours_tes_exe_int_url"][$i],
+                                            "cours_tes_exe_int_name" =>  $request["data"]["field_to_updade"]["cours_tes_exe_int"]["cours_tes_exe_int_name"][$i],
+                                            "cours_tes_exe_int_url" =>  $request["data"]["field_to_updade"]["cours_tes_exe_int"]["cours_tes_exe_int_url"][$i],
                                             "cours_tes_id" => $response["last_insert_id"]
                                         ]
                                     );
@@ -66,36 +68,31 @@ function cours_tes_request($pdo, $request){
             break;
 
             case "select":
-/*
-                $all_cours_tes = [
-                    "cours_tes_title" => "",
-                    "cours_tes_id" => "",
-                    "cours_tes_place_number" => "",
-                    "cours_tes_date" => "",
-                    "cours_tes_sub_title" => [],
-                    "cours_tes_exe_int" =>[
-                        "cours_tes_exe_int_url" => [],
-                        "cours_tes_exe_int_name" => []
-                        ]
-                    ];
-*/
+
+                //print_r(json_encode($request)); die();
+
                 if($request["all"]){
 
                     $all_cours_tes = [];
 
-                    $all_cours_tes = request_prepare($pdo,'SELECT * FROM cours_tes', null, null, true );
+                    $cours_tes_index = request_prepare($pdo,'SELECT * FROM cours_tes', null, null, true );
 
-                    return request_prepare($pdo, "SELECT * FROM cours_tes_exercice_interactif,cours_tes_exo_pdf, cours_tes_pdf, cours_tes_sub_title WHERE cours_tes_exercice_interactif.cours_tes_id AND cours_tes_exo_pdf.cours_tes_id AND cours_tes_pdf.cours_tes_id AND cours_tes_sub_title.cours_tes_id = :cours_tes_id", ["cours_tes_id" => $all_cours_tes[0]["cours_tes_id"]],
-                        null,
-                        true);
+                    for ($i = 0; $i < sizeof($cours_tes_index); $i++){
 
+                        $associate_table = ["cours_tes", "cours_tes_sub_title", "cours_tes_pdf", "cours_tes_exo_pdf", "cours_tes_exercice_interactif"];
 
-/*
-                    $all_cours_tes["cours_tes_title"] = $response[0]["cours_tes_title"];
-                    $all_cours_tes["cours_tes_id"] = $response[0]["id"];
-                    $all_cours_tes["cours_tes_place_number"] = $response[0]["cours_tes_place_number"];
-                    $all_cours_tes["cours_tes_date"] = $response[0]["date"];
-*/
+                        foreach ($associate_table as $item) {
+                            $response = request_prepare($pdo,
+                                "SELECT * FROM $item
+                            WHERE $item.cours_tes_id = :cours_tes_id",
+                                ["cours_tes_id" => $cours_tes_index[$i]["cours_tes_id"]],
+                                null, true);
+
+                            $all_cours_tes[$i][$item] = $response;
+                        }
+
+                    }
+                    return $all_cours_tes;
                 }
             break;
         }

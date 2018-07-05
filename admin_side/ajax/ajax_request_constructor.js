@@ -1,12 +1,18 @@
-var ajax_object = {
+var ajax_request_construtor = {
 
-    ajax_request : function (url, method, data){
+    ajax_request : function (method, data, callback){
 
         return $.ajax({
-            url: url,
+            url: "../php_backend/controller/request_controller.php",
             method: method,
             data: data
-        });
+        })
+            .done(function(response){
+                callback(response)
+            })
+            .fail(function(response){
+                callback(response);
+            })
 
     },
 

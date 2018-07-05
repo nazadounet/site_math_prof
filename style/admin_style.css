@@ -1,3 +1,24 @@
+/****************************** GENERAL RULES ********************************/
+.display_flex_row_center_center{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.display_flex_col_center_center{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.flex_wraped{
+    flex-wrap: wrap;
+}
+
+/****************************** GENERAL RULES ********************************/
+
 
 .container{
     max-width: 100% !important;

@@ -14,9 +14,13 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
 <!-- custome script -->
+<script src="../admin_side/controller/button_event_controller.js"></script>
+
 <script src="../admin_side/ajax/ajax_request_constructor.js"></script>
-<script src="../admin_side/controller/cours_tes_controller.js"></script>
-<script src="../admin_side/controller/admin_request_controller.js"></script>
+<script src="../admin_side/controller/request_controller.js"></script>
+
+<script src="../../../admin_side/controller/cours_tes/cours_tes_controller.js"></script>
+<script src="../admin_side/controller/zadmin_request_controller.js"></script>
 <!-- custome script -->
 
 </body>
