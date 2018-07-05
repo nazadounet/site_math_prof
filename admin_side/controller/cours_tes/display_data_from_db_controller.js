@@ -1,23 +1,13 @@
-function display_data_cours_tes() {
+function display_data_cours_tes(event) {
 
     cours_tes_controller.get_data_from_cours_tes(function(response){
 
-        console.log(response);
+        var update_value =event.target.parentNode.querySelector("input").value;
 
         if(response.length > 0){
 
-            var html_cours_tes_title = document.querySelector("#cours_tes");
-
-
             for (var i = 0; i < response.length; i++){
-                var title_span = document.createElement("span");
 
-                title_span.setAttribute("class", "display_cours_tes_title");
-                title_span.innerHTML = "lolsava";
-
-                console.log(title_span);
-
-                html_cours_tes_title.appendChild(title_span);
             }
         }
 

@@ -43,11 +43,10 @@
             <input class="input_cours_TES" name="cours_tes_exe_int_name" type="text">
         </div>
 
-    <button type="button" name="insert" class="admin_submit_button cours_tes">Valider</button>
-    <button onclick="display_data_cours_tes()" type="button" name="select" class="">Valider</button>
+    <button type="button" name="insert" class="cours_tes" onclick="button_event_controller(event)">Valider</button>
 
 
-    <div>
+    <div id="cours_tes_array_data">
         <table style="border:1px solid">
             <tr style="border:1px solid">
                 <th style="border:1px solid">chapitre</th>
@@ -58,31 +57,34 @@
             <tr style="border:1px solid">
                 <td style="border:1px solid">
                     <div>
-                        <div id="cours_tes" class="display_flex_row_center_center">
-                            <span class="display_cours_tes_title">chapitre</span>
-                            <input id="1" type="hidden" name="cours_tes_title">
-                            <button onclick="display_data_cours_tes()">update</button>
+                        <div class="display_flex_row_center_center flex_jus_left">
+                            <input type="text">
+                            <input id="1" type="hidden" name="cours_tes" value="cours_tes_title">
+                            <button class="cours_tes" name="update" onclick="button_event_controller(event)">update</button>
                         </div>
-                        <div id="cour_tes_sub_title" class="display_flex_col_center_center">
-                            <ul>
-                                <li class="display_flex_row_center_center">
+                        <div id="cour_tes_sub_title" class="display_flex_row_center_center flex_jus_left">
+                                <div class="display_flex_row_center_center">
                                     <span>sub_title</span>
                                     <input id="1" type="hidden" name="cours_tes_sub_title">
                                     <button>update</button>
-                                </li>
-                            </ul>
+                                </div>
                         </div>
                     </div>
                 </td>
-                <td style="border:1px solid">
-                    <span class="display_cours_tes_pdf_url">url</span>
+                <td>
+                    <div class="display_flex_row_center_center">
+                        <a href="#" class=""><img class="icon_pdf_width" src="admin_side_img/pdf.png" alt="icon_pdf_red"></a>
+                    </div>
                 </td>
-                <td style="border:1px solid">
-                    <span class="display_cours_tes_exo_pdf_url">url</span>
+                <td>
+                    <div class="display_flex_row_center_center">
+                        <a href="#" class=""><img class="icon_pdf_width" src="admin_side_img/pdf_green.png" alt="icon_pdf_green"></a>
+                    </div>
                 </td>
-                <td style="border:1px solid">
+                <td>
                     <ul>
-                        <li class="display_cours_tes_exe_int_name"><a class="display_cours_tes_exe_int_url" href="">item</a></li>
+                        <div>
+                            <a class="" href="">item</a></div>
                     </ul>
                 </td>
             </tr>

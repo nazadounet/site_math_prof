@@ -17,6 +17,18 @@
     flex-wrap: wrap;
 }
 
+.flex_jus_left{
+    justify-content: flex-start !important;
+}
+
+.icon_pdf_width{
+    width: 60px;
+}
+
+.debug{
+    background: red;
+}
+
 /****************************** GENERAL RULES ********************************/
 
 
@@ -79,5 +91,18 @@ div#side_menu_admin_page li{
 .tabs_content_container{
     margin-left: 220px;
     margin-top: 100px;
+    padding-right:10px;
 }
 /************************************** GENERAL TABS SECTION ************************************************/
+
+/************************************** COURS TES TABLE DATA SECTION ************************************************/
+div#cours_tes_array_data table{
+    width: 100%;
+}
+
+div#cours_tes_array_data table td{
+    border-right: 1px solid black;
+    border-left: 1px solid black;
+}
+
+/************************************** COURS TES TABLE DATA SECTION ************************************************/

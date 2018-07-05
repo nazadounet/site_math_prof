@@ -53,8 +53,8 @@ var cours_tes_controller = {
 
     },
 
-    update_cours_tes : function (params) {
-
+    update_cours_tes : function (event) {
+            console.log(event.target.parentNode.querySelector("input").value);
     }
 
 };
