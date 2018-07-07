@@ -1,9 +1,20 @@
 <?php require_once "../include/header.php"?>
 
 
-<!-- CONTENT SECTION -->
-<?php include("admin_side_template/side_menu_admin.html") ?>
-<?php include("admin_side_template/cours_TES.php") ?>
+
+    <script>
+
+    $(document).ready(function(){
+        $("#container").load("admin_side_template/cours_TES.php");
+    });
+
+    function load_cours_tes() {
+        $("#container").load("admin_side_template/cours_TES.php");
+        console.log("loader");
+    }
+    </script>
+
+<?php include("modal_template/bootstrap_modal.html") ?>
 <!-- CONTENT SECTION --
 
 
